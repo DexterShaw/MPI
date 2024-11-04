@@ -15,7 +15,7 @@ array[M] of int: HS; %movie size [MB]
 array[M] of int: HB; %movie bitrate in [MB/s]
 array[V,M] of int: HP; %movie popularity from server [n/s]
 
-array[V][V] of int: ED; %edge distances [km]
+array[V,V] of int: ED; %edge distances [km]
 
 array[V,M] of int: CA; %cost for allocating movie M on server V
 
