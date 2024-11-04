@@ -14,9 +14,6 @@ RS = array1d (1..V_, [36, 34, 38]);
 % outgoing transmittion capacity of server v
 RT_OUT = array1d (1..V_, [12, 13, 14]);
 
-% incoming transmittion capacity of server v
-RT_IN = array1d (1..V_, [14, 12, 13]);
-
 % movie size
 HS = array1d (1..M_, [10,10,10,10,10]);
 
@@ -24,7 +21,10 @@ HS = array1d (1..M_, [10,10,10,10,10]);
 HB = array1d (1..M_, [3,3,3,3,3]);
 
 %movie popularity from each server
-HP = array1d (1..M_, [1,2,3,4,5]);
+HP = array1d (1..V_,1..M_, [
+1,1,1,1,1
+1,1,1,1,1
+1,1,1,1,1]);
 
 
 %edge distances
