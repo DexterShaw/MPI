@@ -6,19 +6,19 @@ V_ = 3;
 M_ = 5;
 
 % standard cost of sending 1 MB over 1km
-CTR = 1;
+CTR = 10;
 
 % storage capacity of server v 
-RS = array1d (1..V_, [36, 34, 38]);
+RS = array1d (1..V_, [999, 999, 999]);
 
 % outgoing transmittion capacity of server v
-RT_OUT = array1d (1..V_, [12, 13, 14]);
+RT_OUT = array1d (1..V_, [999, 999, 999]);
 
 % movie size
-HS = array1d (1..M_, [10,10,10,10,10]);
+HS = array1d (1..M_, [1,1,1,1,1]);
 
 %movie bitrate
-HB = array1d (1..M_, [3,3,3,3,3]);
+HB = array1d (1..M_, [1,1,1,1,1]);
 
 %movie popularity from each server
 HP = array2d (1..V_,1..M_, [
@@ -36,8 +36,8 @@ ED = array2d (1..V_, 1..V_, [
 
 %allocation cost
 CA = array2d (1..V_, 1..M_, [
-2, 2, 2, 2, 2,
-2, 2, 2, 2, 2,
-2, 2, 2, 2, 2]);
+1, 1, 1, 1, 1,
+1, 1, 1, 1, 1,
+1, 1, 1, 1, 1]);
 
 
