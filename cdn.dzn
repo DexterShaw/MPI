@@ -21,9 +21,9 @@ HS = array1d (1..M_, [10,10,10,10,10]);
 HB = array1d (1..M_, [3,3,3,3,3]);
 
 %movie popularity from each server
-HP = array1d (1..V_,1..M_, [
-1,1,1,1,1
-1,1,1,1,1
+HP = array2d (1..V_,1..M_, [
+1,1,1,1,1,
+1,1,1,1,1,
 1,1,1,1,1]);
 
 
@@ -33,14 +33,9 @@ ED = array2d (1..V_, 1..V_, [
 2, 0, 2,
 2, 2, 0]);
 
-%edge bitrate
-ED = array2d (1..V_, 1..V_, [
-0, 6, 6,
-6, 0, 6,
-6, 6, 0]);
 
 %allocation cost
-CA = array2d (1..V_, 1..m_, [
+CA = array2d (1..V_, 1..M_, [
 2, 2, 2, 2, 2,
 2, 2, 2, 2, 2,
 2, 2, 2, 2, 2]);
