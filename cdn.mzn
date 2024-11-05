@@ -41,8 +41,10 @@ constraint
 
 constraint
     forall(m in M, v2 in V)(
-        sum(v1 in V)(y[v1,v2,m]) = HB[m] * HP[v2,m] * (1 - x[v2,m]) 
+        sum(v1 in V)(y[v1,v2,m] * x[v1,m]) = HB[m] * HP[v2,m] * (1 - x[v2,m])
     ); %movie transmitted to v2 exactly HP[v2,m] times if not stored on v2
+    
+
     
 %target cost minimu,
 var int: cost;
@@ -58,5 +60,19 @@ var int: transmission_cost = sum(v1 in V, v2 in V, m in M)(
 % Total cost
 cost = allocation_cost + transmission_cost;
 
-solve minimize cost
+solve minimize cost;
 %solve satisfy
+
+output[
+    show(cost) ++ "\n"
+] ++
+[
+    concat([
+        concat([show(x[j,i]) ++ " " | i in 1..M_]) ++ "\n" | j in 1..V_
+        ]) ++ "\n"
+]++
+[
+    show(m) ++ "\n" ++
+    concat([show(y[i, 1, m]) ++ " " ++ show(y[i, 2, m]) ++ " " ++ show(y[i, 3, m]) ++ "\n" | i in 1..3])
+    | m in 1..5
+];
