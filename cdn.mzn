@@ -1,4 +1,4 @@
-include "cdn_one_allocate.dzn";
+include "cdn_2.dzn";
 
 int: V_; %number of edge servers
 int: M_; %number of movies
