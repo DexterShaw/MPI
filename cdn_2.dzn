@@ -9,22 +9,22 @@ M_ = 5;
 CTR = 1;
 
 % storage capacity of server v 
-RS = array1d (1..V_, [999, 40, 20]);
+RS = array1d (1..V_, [99, 99, 99]);
 
 % outgoing transmittion capacity of server v
-RT_OUT = array1d (1..V_, [33, 99, 33]);
+RT_OUT = array1d (1..V_, [99, 99, 99]);
 
 % movie size
-HS = array1d (1..M_, [7,7,7,6,6]);
+HS = array1d (1..M_, [10,10,10,10,10]);
 
 %movie bitrate
-HB = array1d (1..M_, [10,10,10,1,1]);
+HB = array1d (1..M_, [2,2,2,2,2]);
 
 %movie popularity from each server
 HP = array2d (1..V_,1..M_, [
-1,1,1,1,1,
-1,1,1,1,1,
-1,1,1,1,1]);
+10,1,1,1,1,
+1,10,1,1,1,
+1,1,10,1,1]);
 
 
 %edge distances
