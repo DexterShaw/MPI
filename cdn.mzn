@@ -73,6 +73,9 @@ output[
 ]++
 [
     show(m) ++ "\n" ++
-    concat([show(y[i, 1, m]) ++ " " ++ show(y[i, 2, m]) ++ " " ++ show(y[i, 3, m]) ++ "\n" | i in 1..3])
-    | m in 1..5
+    concat([
+    	concat([
+    		show(y[i, j, m]) ++ " " | j in 1..V_
+    		]) ++ "\n" | i in 1..V_
+    	]) | m in 1..M_
 ];
