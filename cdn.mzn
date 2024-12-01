@@ -1,4 +1,4 @@
-include "cdn_5x5.dzn";
+include "cdn_2.dzn";
 
 int: V_; %number of edge servers
 int: M_; %number of movies
