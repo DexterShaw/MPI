@@ -15,7 +15,7 @@ set of int: M = 1..M_; %set of movies
 
 array[V] of int: RS; %instance storage capacity [MB]
 array[V] of int: RT_OUT; %instance transmittion capacity [MB/s] (outgoing)
-array[V] of int: RC; %instance cost
+
 
 array[M] of int: HS; %movie size [MB]
 array[M] of int: HB; %movie bitrate in [MB/s]
@@ -25,6 +25,7 @@ array[V,M] of int: HP; %movie popularity from server [n/s]
 array[V,V] of int: ED; %edge distances [km]
 
 array[V,M] of int: CA; %cost for allocating movie M on server V
+array[V] of int: CI; %instance cost on server v
 
 array[1..max_instances] of int: erlang_table;
 
@@ -107,7 +108,7 @@ constraint
 var int: cost;
 
 %Running cost
-var int: running_cost = sum(v in V)(z[v]*RC[v]);
+var int: running_cost = sum(v in V)(z[v]*CI[v]);
 
 % Allocation cost
 var int: allocation_cost = sum(v in V, m in M)(x[v,m] * CA[v,m]);
