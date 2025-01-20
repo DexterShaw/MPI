@@ -7,8 +7,8 @@ int: M_; %number of movies
 int: CTR; % cost of transmitting 1 MB/km
 
 int: max_instances;
-int: target_pB;
-int: lambda;
+%int: target_pB;
+%int: lambda;
 
 set of int: V = 1..V_; %set of edge servers
 set of int: M = 1..M_; %set of movies
@@ -74,6 +74,11 @@ constraint
     forall(v in V)(
     	sum (m in M)(x[v,m]*HS[m]) <= RS[v]*z[v]
     	); %sum of movie sizes does not exceed server storage capacity
+    	
+constraint
+    forall(v in V)(
+        z[v] <= max_instances
+    );
 
 constraint
     forall(v1 in V)(
