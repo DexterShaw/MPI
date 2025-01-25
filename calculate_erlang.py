@@ -1,3 +1,7 @@
+import sys
+sys.setrecursionlimit(2000)
+
+
 def PB(A: float, n: int) -> float:
     if n == 0:
         return 1.0
@@ -17,13 +21,13 @@ def find_max_offered_load(n: int, target_pB: float, low: float, high: float) -> 
         return find_max_offered_load(n, target_pB, mid, high)
 
 
-max_instances = 30  
+max_instances = 200
 target_pB = 0.01  
 
 erlang_table = {}
 
 for n in range(1, max_instances + 1):
-    erlang_table[n] = find_max_offered_load(n, target_pB, 0.0, 25.0)
+    erlang_table[n] = find_max_offered_load(n, target_pB, 0.0, 300.0)
 
 
 for n, value in erlang_table.items():

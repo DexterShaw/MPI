@@ -35,36 +35,6 @@ array[V,V,M] of var 0..9999: y; %how many MB of movie m are transitted from v1 t
 array[V] of var 0..max_instances: z;  %number of instances running in location V
 
 
-%function float: PB(float: A, int: n) = 
-%	if n = 0 then
-%		1
-%	else
-%		let {
-%			float: prev = PB(A, n-1)
-%		} in
-%		(A * prev) / (A*prev + n)
-%	endif;
-	
-%function float: find_max_offered_load(int: n, float: target_pB, float: low, float: high) =
-%    let {
-%        float: mid = (low + high) / 2.0,
-%        float: pB = PB(mid, n)
-%    } in
-%    if abs(pB*100 - target_pB) < 1e-4 then
-%        mid
-%    else if pB > target_pB then
-%        find_max_offered_load(n, target_pB, low, mid)
-%    else
-%        find_max_offered_load(n, target_pB, mid, high)
-%    endif;
-
-
-%constraint
-%    forall(n in 1..max_instances)(
-%        erlang_table[n] = find_max_offered_load(n, target_pB, 0.0, 30.0)
-%    );
-
-
 constraint
     forall(m in M)(
     	sum (v in V)(x[v,m]) >= 1 
@@ -76,37 +46,27 @@ constraint
     	); %sum of movie sizes does not exceed server storage capacity
     	
 constraint
-    forall(v in V)(
-        z[v] <= max_instances
-    );
-
-constraint
     forall(v1 in V)(
         sum(v2 in V, m in M)(y[v1,v2,m]*HB[m]) <= RT_OUT[v1]*z[v1] 
     ); %transmitted data from a server does not exceed server outgoing transmission capacity
 
 constraint
     forall(m in M, v2 in V)(
-        sum(v1 in V)(y[v1,v2,m]*x[v1,m]) >= HB[m]*HP[v2,m]*(1-x[v2,m])
+        sum(v1 in V)(y[v1,v2,m]*x[v1,m]) >= HB[m]*(1-x[v2,m])
     ); %movie transmitted to v2 if not stored on v2
     
 constraint
     forall(v in V)(
-        10 *
+        10000 *
         (
             sum(m in M)(x[v,m]*HP[v,m]) + 
             sum(v2 in V, m in M where y[v,v2,m] > 0)(1)
         )
         *
         (
-            sum(m in M)(HS[m]*x[v,m]) + 
-            sum(v2 in V, m in M where y[v,v2,m] > 0)(HS[m])
+            sum(m in M)(HS[m]*x[v,m])
         ) 
-        <= erlang_table[z[v]] *
-	(
-            sum(m in M)(x[v,m]) + 
-            sum(v2 in V, m in M where y[v,v2,m] > 0)(1)
-        )
+        <= erlang_table[z[v]] * sum(m in M)(x[v,m]) 
     ); %assuming in given timeframe comes lambda requests, and 1/mi is equal to average movie sizes asked from v, lambda * 1/mi must not exceed max possible load
     
 %target cost minimu,
