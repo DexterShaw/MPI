@@ -13,9 +13,9 @@ def generate_minizinc_file(filename, v_range, m_range, ctr_range, rs_range, rt_o
     HB = [random.randint(*hb_range) for _ in range(M_)]
     HP = [[random.randint(*hp_range) for _ in range(M_)] for _ in range(V_)]
     
-    ED = [[0 if i == j else random.randint(10, 100) for j in range(V_)] for i in range(V_)]
+    ED = [[0 if i == j else 10*random.randint(0, 10) for j in range(V_)] for i in range(V_)]
     
-    CA = [[random.randint(*ca_range) for _ in range(M_)] for _ in range(V_)]
+    CA = [[random.randint(*ca_range)*5 for _ in range(M_)] for _ in range(V_)]
     
     CI = [random.randint(*ci_range) for _ in range(V_)]
     
@@ -25,7 +25,6 @@ def generate_minizinc_file(filename, v_range, m_range, ctr_range, rs_range, rt_o
         f.write(f"%number of servers\nV_ = {V_};\n\n")
         f.write(f"% number of Movies\nM_ = {M_};\n\n")
         f.write(f"% standard cost of sending 1 MB over 1km\nCTR = {CTR};\n\n")
-        f.write("%lambda\n%target_pB\n\n")
         f.write(f"max_instances = {max_instances};\n\n")
         f.write(f"% storage capacity of server v\nRS = array1d (1..V_, {RS});\n\n")
         f.write(f"% outgoing transmission capacity of server v\nRT_OUT = array1d (1..V_, {RT_OUT});\n\n")
@@ -47,15 +46,15 @@ def generate_minizinc_file(filename, v_range, m_range, ctr_range, rs_range, rt_o
         f.write(f"erlang_table = array1d(1..max_instances, {erlang_table});\n")
 
 # Example usage:
-v_range = (3, 3)  # Example range for V_
-m_range = (5, 5)  # Example range for M_
-ctr_range = (1, 5)
-rs_range = (1, 20)
-rt_out_range = (1, 10)
+v_range = (4, 4)  # Example range for V_
+m_range = (4, 4)  # Example range for M_
+ctr_range = (1,1)
+rs_range = (4, 10)
+rt_out_range = (2, 8)
 hb_range = (1, 5)
-hs_range = (1, 5)
-hp_range = (0, 40)
-ca_range = (5, 10)
+hs_range = (1, 10)
+hp_range = (0, 30)
+ca_range = (1, 5)
 ci_range = (10, 20)
 
 for i in range(2, 3):
