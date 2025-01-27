@@ -46,7 +46,7 @@ def generate_minizinc_file(filename, v_range, m_range, ctr_range, rs_range, rt_o
         f.write(f"erlang_table = array1d(1..max_instances, {erlang_table});\n")
 
 # Example usage:
-v_range = (4, 4)  # Example range for V_
+v_range = (3, 3)  # Example range for V_
 m_range = (4, 4)  # Example range for M_
 ctr_range = (1,1)
 rs_range = (4, 10)

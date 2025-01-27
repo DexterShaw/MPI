@@ -7,8 +7,7 @@ int: M_; %number of movies
 int: CTR; % cost of transmitting 1 MB/km
 
 int: max_instances;
-%int: target_pB;
-%int: lambda;
+
 
 set of int: V = 1..V_; %set of edge servers
 set of int: M = 1..M_; %set of movies
@@ -32,7 +31,7 @@ array[1..max_instances] of int: erlang_table;
 %result variables
 array[V,M] of var 0..1: x; %1 means movie K is on server V
 array[V,V,M] of var 0..9999: y; %how many MB of movie m are transitted from v1 to v2 
-array[V] of var 0..max_instances: z;  %number of instances running in location V
+array[V] of var 1..max_instances: z;  %number of instances running in location V
 
 
 constraint
@@ -52,7 +51,7 @@ constraint
 
 constraint
     forall(m in M, v2 in V)(
-        sum(v1 in V)(y[v1,v2,m]*x[v1,m]) >= HB[m]*(1-x[v2,m])
+        sum(v1 in V where ED[v1,v2] > 0)(y[v1,v2,m]*x[v1,m]) >= HB[m]*(1-x[v2,m])
     ); %movie transmitted to v2 if not stored on v2
     
 constraint
@@ -90,7 +89,7 @@ solve minimize cost;
 %solve satisfy;
 
 output[
-    show(cost) ++ "\n"
+    show(cost) ++ " = " ++ show(running_cost) ++ " + " ++ show(allocation_cost) ++ " + " ++ show(transmission_cost) ++ "\n"
 ] ++
 [
     concat([show(z[i]) ++ " " | i in 1..V_]) ++ "\n"
