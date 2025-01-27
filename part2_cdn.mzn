@@ -63,11 +63,11 @@ constraint
         )
         *
         (
-            sum(m in M where HP[v,m]>0)(HS[m])
+            sum(m in M where (HP[v,m]+x[v,m])>0)(HS[m])
         ) 
         <= erlang_table[z[v]] * 
         (
-            sum(m in M where HP[v,m]>0)(1)
+            sum(m in M where (HP[v,m]+x[v,m])>0)(1)
         )
             
     ); %assuming in given timeframe comes lambda requests, and 1/mi is equal to average movie sizes asked from v, lambda * 1/mi must not exceed max possible load
