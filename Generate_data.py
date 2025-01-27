@@ -15,7 +15,7 @@ def generate_minizinc_file(filename, v_range, m_range, ctr_range, rs_range, rt_o
     
     ED = [[0 if i == j else 10*random.randint(0, 10) for j in range(V_)] for i in range(V_)]
     
-    CA = [[random.randint(*ca_range)*5 for _ in range(M_)] for _ in range(V_)]
+    CA = [[10*random.randint(*ca_range)**2 for _ in range(M_)] for _ in range(V_)]
     
     CI = [random.randint(*ci_range) for _ in range(V_)]
     
@@ -46,16 +46,16 @@ def generate_minizinc_file(filename, v_range, m_range, ctr_range, rs_range, rt_o
         f.write(f"erlang_table = array1d(1..max_instances, {erlang_table});\n")
 
 # Example usage:
-v_range = (3, 3)  # Example range for V_
-m_range = (4, 4)  # Example range for M_
+v_range = (4, 4)  # Example range for V_
+m_range = (5, 5)  # Example range for M_
 ctr_range = (1,1)
 rs_range = (4, 10)
 rt_out_range = (2, 8)
 hb_range = (1, 5)
 hs_range = (1, 10)
-hp_range = (0, 30)
-ca_range = (1, 5)
-ci_range = (10, 20)
+hp_range = (0, 10)
+ca_range = (2, 10)
+ci_range = (1, 5)
 
 for i in range(2, 3):
     generate_minizinc_file(f"part2_cdn_data_1{i}.dzn", v_range, m_range, ctr_range, rs_range, rt_out_range, hb_range, hs_range, hp_range, ca_range, ci_range)

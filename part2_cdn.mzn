@@ -58,14 +58,18 @@ constraint
     forall(v in V)(
         10000 *
         (
-            sum(m in M)(x[v,m]*HP[v,m]) + 
+            sum(m in M)(HP[v,m]) + 
             sum(v2 in V, m in M where y[v,v2,m] > 0)(1)
         )
         *
         (
-            sum(m in M)(HS[m]*x[v,m])
+            sum(m in M where HP[v,m]>0)(HS[m])
         ) 
-        <= erlang_table[z[v]] * sum(m in M)(x[v,m]) 
+        <= erlang_table[z[v]] * 
+        (
+            sum(m in M where HP[v,m]>0)(1)
+        )
+            
     ); %assuming in given timeframe comes lambda requests, and 1/mi is equal to average movie sizes asked from v, lambda * 1/mi must not exceed max possible load
     
 %target cost minimu,
