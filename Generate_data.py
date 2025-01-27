@@ -47,15 +47,15 @@ def generate_minizinc_file(filename, v_range, m_range, ctr_range, rs_range, rt_o
 
 # Example usage:
 v_range = (4, 4)  # Example range for V_
-m_range = (5, 5)  # Example range for M_
+m_range = (7, 7)  # Example range for M_
 ctr_range = (1,1)
 rs_range = (4, 10)
 rt_out_range = (2, 8)
 hb_range = (1, 5)
-hs_range = (1, 10)
-hp_range = (0, 10)
+hs_range = (1, 9)
+hp_range = (0, 9)
 ca_range = (2, 10)
-ci_range = (1, 5)
+ci_range = (1, 6)
 
 for i in range(2, 3):
     generate_minizinc_file(f"part2_cdn_data_1{i}.dzn", v_range, m_range, ctr_range, rs_range, rt_out_range, hb_range, hs_range, hp_range, ca_range, ci_range)
